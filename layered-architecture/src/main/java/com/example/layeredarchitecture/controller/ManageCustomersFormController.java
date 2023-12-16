@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.dao.CustomerDAO;
 import com.example.layeredarchitecture.dao.CustomerDAOImpl;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.view.tdm.CustomerTM;
@@ -72,7 +73,7 @@ public class ManageCustomersFormController {
 //            Connection connection = DBConnection.getDbConnection().getConnection();
 //            Statement stm = connection.createStatement();
 //            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
-            CustomerDAOImpl customerDAO=new CustomerDAOImpl();
+            CustomerDAO customerDAO=new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
             for (CustomerDTO dto :allCustomer){
@@ -163,7 +164,7 @@ public class ManageCustomersFormController {
 //                pstm.setString(3, address);
 //                pstm.executeUpdate();
 
-                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+                CustomerDAO customerDAO = new CustomerDAOImpl();
                 boolean isSaved = customerDAO.saveCustomer(new CustomerDTO(id,name,address));
              if (isSaved){
                  tblCustomers.getItems().add(new CustomerTM(id,name,address));
@@ -191,7 +192,7 @@ public class ManageCustomersFormController {
 
 
                 CustomerDTO dto = new CustomerDTO(id,name,address);
-                CustomerDAOImpl dao = new CustomerDAOImpl();
+                CustomerDAO dao = new CustomerDAOImpl();
                 dao.updateCustomer(dto);
 
             } catch (SQLException e) {
@@ -218,7 +219,7 @@ public class ManageCustomersFormController {
 
 
 
-        CustomerDAOImpl customerDAO =new CustomerDAOImpl();
+        CustomerDAO customerDAO =new CustomerDAOImpl();
         return customerDAO.existCustomer(id);
     }
 
@@ -239,7 +240,7 @@ public class ManageCustomersFormController {
             tblCustomers.getSelectionModel().clearSelection();
             initUI();
 
-            CustomerDAOImpl customerDAO =new CustomerDAOImpl();
+            CustomerDAO customerDAO =new CustomerDAOImpl();
             customerDAO.deleteCustomer(id);
 
         } catch (SQLException e) {
@@ -263,7 +264,7 @@ public class ManageCustomersFormController {
 //                return "C00-001";
 //            }
 
-            CustomerDAOImpl customerDAO =new CustomerDAOImpl();
+            CustomerDAO customerDAO =new CustomerDAOImpl();
             return customerDAO.genereteNewId();
 
         } catch (SQLException e) {

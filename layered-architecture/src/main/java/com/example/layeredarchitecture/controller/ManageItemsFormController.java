@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.ItemDAO;
 import com.example.layeredarchitecture.dao.ItemDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
@@ -80,7 +81,7 @@ public class ManageItemsFormController {
 //                tblItems.getItems().add(new ItemTM(rst.getString("code"), rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand")));
          //   }
 
-            ItemDAOImpl itemDAO=new ItemDAOImpl();
+            ItemDAO itemDAO=new ItemDAOImpl();
             ArrayList<ItemDTO> allItems= (ArrayList<ItemDTO>) itemDAO.loadAllItems();
             for (ItemDTO dto :allItems ){
                 tblItems.getItems().add(new ItemTM(
@@ -154,7 +155,7 @@ public class ManageItemsFormController {
             tblItems.getSelectionModel().clearSelection();
             initUI();
 
-            ItemDAOImpl itemDAO =new ItemDAOImpl();
+            ItemDAO itemDAO =new ItemDAOImpl();
             itemDAO.deleteItem(code);
 
         } catch (SQLException e) {
@@ -199,7 +200,7 @@ public class ManageItemsFormController {
 //                pstm.setBigDecimal(3, unitPrice);
 //                pstm.setInt(4, qtyOnHand);
 //                pstm.executeUpdate();
-                ItemDAOImpl itemDAO =new ItemDAOImpl();
+                ItemDAO itemDAO =new ItemDAOImpl();
                 boolean isSaved = itemDAO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 if (isSaved){
                     tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
@@ -233,7 +234,7 @@ public class ManageItemsFormController {
                 tblItems.refresh();
 
                 ItemDTO dto = new ItemDTO(code,description,unitPrice,qtyOnHand);
-                ItemDAOImpl dao= new ItemDAOImpl();
+                ItemDAO dao= new ItemDAOImpl();
                 dao.updateItem(dto);
 
             } catch (SQLException e) {
@@ -253,7 +254,7 @@ public class ManageItemsFormController {
 //        pstm.setString(1, code);
 //        return pstm.executeQuery().next();
 
-        ItemDAOImpl itemDAO = new ItemDAOImpl();
+        ItemDAO itemDAO = new ItemDAOImpl();
         return itemDAO.exciteItem(code);
     }
 
@@ -270,7 +271,7 @@ public class ManageItemsFormController {
 //                return "I00-001";
 //            }
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             return itemDAO.genereteNewId();
 
         } catch (SQLException e) {
