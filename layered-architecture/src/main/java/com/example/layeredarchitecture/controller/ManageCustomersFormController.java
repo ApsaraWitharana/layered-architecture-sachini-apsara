@@ -38,6 +38,8 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
+    //property injection
+    CustomerDAO customerDAO=new CustomerDAOImpl();
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -73,7 +75,7 @@ public class ManageCustomersFormController {
 //            Connection connection = DBConnection.getDbConnection().getConnection();
 //            Statement stm = connection.createStatement();
 //            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
-            CustomerDAO customerDAO=new CustomerDAOImpl();
+
             ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
             for (CustomerDTO dto :allCustomer){
@@ -164,7 +166,7 @@ public class ManageCustomersFormController {
 //                pstm.setString(3, address);
 //                pstm.executeUpdate();
 
-                CustomerDAO customerDAO = new CustomerDAOImpl();
+
                 boolean isSaved = customerDAO.saveCustomer(new CustomerDTO(id,name,address));
              if (isSaved){
                  tblCustomers.getItems().add(new CustomerTM(id,name,address));
@@ -192,8 +194,8 @@ public class ManageCustomersFormController {
 
 
                 CustomerDTO dto = new CustomerDTO(id,name,address);
-                CustomerDAO dao = new CustomerDAOImpl();
-                dao.updateCustomer(dto);
+
+                customerDAO.updateCustomer(dto);
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -219,7 +221,6 @@ public class ManageCustomersFormController {
 
 
 
-        CustomerDAO customerDAO =new CustomerDAOImpl();
         return customerDAO.existCustomer(id);
     }
 
@@ -240,7 +241,7 @@ public class ManageCustomersFormController {
             tblCustomers.getSelectionModel().clearSelection();
             initUI();
 
-            CustomerDAO customerDAO =new CustomerDAOImpl();
+
             customerDAO.deleteCustomer(id);
 
         } catch (SQLException e) {
@@ -264,7 +265,7 @@ public class ManageCustomersFormController {
 //                return "C00-001";
 //            }
 
-            CustomerDAO customerDAO =new CustomerDAOImpl();
+
             return customerDAO.genereteNewId();
 
         } catch (SQLException e) {

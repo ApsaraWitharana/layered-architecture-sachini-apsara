@@ -1,5 +1,9 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.dao.CustomerDAO;
+import com.example.layeredarchitecture.dao.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.ItemDAO;
+import com.example.layeredarchitecture.dao.ItemDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
@@ -48,6 +52,13 @@ public class PlaceOrderFormController {
     public Label lblDate;
     public Label lblTotal;
     private String orderId;
+
+    CustomerDAO  customerDAO = new CustomerDAOImpl();
+    ItemDAO itemDAO = new ItemDAOImpl();
+    //OrderDAO orderDAO = new OrderDAO();
+    //OrderDetailsDAO orderdetailsDAO = new OrderDetailsDAO();
+
+    //ek ek data tipe ewa dnna kohomd
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -333,6 +344,7 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
+            //orderdaoimpl
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
             stm.setString(1, orderId);

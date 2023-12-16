@@ -39,7 +39,8 @@ public class ManageItemsFormController {
     public TableView<ItemTM> tblItems;
     public TextField txtUnitPrice;
     public JFXButton btnAddNewItem;
-
+    //property injection
+    ItemDAO itemDAO=new ItemDAOImpl();
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblItems.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -81,7 +82,7 @@ public class ManageItemsFormController {
 //                tblItems.getItems().add(new ItemTM(rst.getString("code"), rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand")));
          //   }
 
-            ItemDAO itemDAO=new ItemDAOImpl();
+
             ArrayList<ItemDTO> allItems= (ArrayList<ItemDTO>) itemDAO.loadAllItems();
             for (ItemDTO dto :allItems ){
                 tblItems.getItems().add(new ItemTM(
@@ -155,7 +156,7 @@ public class ManageItemsFormController {
             tblItems.getSelectionModel().clearSelection();
             initUI();
 
-            ItemDAO itemDAO =new ItemDAOImpl();
+
             itemDAO.deleteItem(code);
 
         } catch (SQLException e) {
@@ -200,7 +201,7 @@ public class ManageItemsFormController {
 //                pstm.setBigDecimal(3, unitPrice);
 //                pstm.setInt(4, qtyOnHand);
 //                pstm.executeUpdate();
-                ItemDAO itemDAO =new ItemDAOImpl();
+
                 boolean isSaved = itemDAO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 if (isSaved){
                     tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
@@ -234,8 +235,8 @@ public class ManageItemsFormController {
                 tblItems.refresh();
 
                 ItemDTO dto = new ItemDTO(code,description,unitPrice,qtyOnHand);
-                ItemDAO dao= new ItemDAOImpl();
-                dao.updateItem(dto);
+
+                itemDAO.updateItem(dto);
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -254,7 +255,7 @@ public class ManageItemsFormController {
 //        pstm.setString(1, code);
 //        return pstm.executeQuery().next();
 
-        ItemDAO itemDAO = new ItemDAOImpl();
+
         return itemDAO.exciteItem(code);
     }
 
@@ -271,7 +272,7 @@ public class ManageItemsFormController {
 //                return "I00-001";
 //            }
 
-            ItemDAO itemDAO = new ItemDAOImpl();
+
             return itemDAO.genereteNewId();
 
         } catch (SQLException e) {
