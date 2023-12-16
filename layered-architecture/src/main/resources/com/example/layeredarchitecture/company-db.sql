@@ -2,10 +2,10 @@ create database company;
 
 use company;
 
-DROP TABLE IF EXISTS `Customer`;
+DROP TABLE IF EXISTS Customer;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Customer` (
+CREATE TABLE Customer (
   `id` varchar(30) NOT NULL,
   `name` varchar(40) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -21,10 +21,10 @@ CREATE TABLE `Customer` (
 -- Table structure for table `Item`
 --
 
-DROP TABLE IF EXISTS `Item`;
+DROP TABLE IF EXISTS Item;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Item` (
+CREATE TABLE Item (
   `code` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `qtyOnHand` int(10) DEFAULT NULL,
@@ -42,10 +42,10 @@ CREATE TABLE `Item` (
 -- Table structure for table `Orders`
 --
 
-DROP TABLE IF EXISTS `Orders`;
+DROP TABLE IF EXISTS Orders;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Orders` (
+CREATE TABLE Orders (
   `oid` varchar(255) NOT NULL,
   `date` date DEFAULT NULL,
   `customerID` varchar(255) DEFAULT NULL,
@@ -59,10 +59,10 @@ CREATE TABLE `Orders` (
 -- Table structure for table `OrderDetails`
 --
 
-DROP TABLE IF EXISTS `OrderDetails`;
+DROP TABLE IF EXISTS OrderDetails;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `OrderDetails` (
+CREATE TABLE OrderDetails (
   `oid` varchar(255) NOT NULL,
   `itemCode` varchar(255) NOT NULL,
   `qty` int(10) DEFAULT NULL,
