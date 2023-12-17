@@ -228,15 +228,19 @@ public class ManageItemsFormController {
 //                pstm.setString(4, code);
 //                pstm.executeUpdate();
 
-                ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
-                selectedItem.setDescription(description);
-                selectedItem.setQtyOnHand(qtyOnHand);
-                selectedItem.setUnitPrice(unitPrice);
-                tblItems.refresh();
-
                 ItemDTO dto = new ItemDTO(code,description,unitPrice,qtyOnHand);
+                boolean isUpdate = itemDAO.updateItem(dto);
 
-                itemDAO.updateItem(dto);
+                if (isUpdate){
+                    ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
+                    selectedItem.setDescription(description);
+                    selectedItem.setQtyOnHand(qtyOnHand);
+                    selectedItem.setUnitPrice(unitPrice);
+                    tblItems.refresh();
+
+                }
+
+
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -280,6 +284,13 @@ public class ManageItemsFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return "I00-001";
+        if (tblItems.getItems().isEmpty()) {
+            return "OID-001";
+        } else {
+            String id = generateNewId();
+            int newCustomerId = Integer.parseInt(id.replace("O", "")) + 1;
+            return String.format("OID-%03d", newCustomerId);
+        }
+
     }
 }

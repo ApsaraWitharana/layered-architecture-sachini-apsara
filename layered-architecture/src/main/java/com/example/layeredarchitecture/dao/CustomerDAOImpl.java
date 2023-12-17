@@ -75,6 +75,26 @@ public class CustomerDAOImpl implements CustomerDAO{
                 return "C00-001";
             }
         }
-}
+@Override
+        public CustomerDTO searchCustomer(String s) throws SQLException, ClassNotFoundException {
+
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+    String newValue = null;
+        pstm.setString(1, s);
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+    return new CustomerDTO(rst.getString(1),
+            rst.getString(2),
+            rst.getString(3));
+
+        }
+
+
+
+        }
+
+
+
 
 

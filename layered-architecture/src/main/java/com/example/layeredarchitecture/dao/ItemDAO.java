@@ -12,7 +12,7 @@ public interface ItemDAO {
      boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
 
 
-     void updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
+     boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
 
 
      boolean exciteItem(String code) throws SQLException, ClassNotFoundException ;
@@ -24,4 +24,8 @@ public interface ItemDAO {
 
    String genereteNewId() throws SQLException, ClassNotFoundException ;
 
-}
+   ItemDTO searchItem(String s) throws SQLException, ClassNotFoundException ;
+
+
+
+    }

@@ -39,14 +39,14 @@ public class ItemDAOImpl implements ItemDAO{
         return pstm.executeUpdate() >0;
     }
 @Override
-    public void updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
                 PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
                 pstm.setString(1, dto.getDescription());
                 pstm.setBigDecimal(2, dto.getUnitPrice());
                 pstm.setInt(3, dto.getQtyOnHand());
                 pstm.setString(4, dto.getCode());
-                pstm.executeUpdate();
+               return pstm.executeUpdate()>0;
     }
 @Override
     public boolean exciteItem(String code) throws SQLException, ClassNotFoundException {
@@ -66,7 +66,7 @@ public class ItemDAOImpl implements ItemDAO{
     @Override
     public String genereteNewId() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
-            ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
+        ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
             if (rst.next()) {
                 String id = rst.getString("code");
                 int newItemId = Integer.parseInt(id.replace("I00-", "")) + 1;
@@ -75,5 +75,17 @@ public class ItemDAOImpl implements ItemDAO{
                 return "I00-001";
             }
     }
+@Override
+    public ItemDTO searchItem(String s) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+        pstm.setString(1, s);
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return new ItemDTO(rst.getString(1),rst.getString(2),rst.getBigDecimal(3),rst.getInt(4));
+    }
+
+
+
 
 }
