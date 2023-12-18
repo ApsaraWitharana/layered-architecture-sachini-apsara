@@ -76,7 +76,7 @@ public class ManageCustomersFormController {
 //            Statement stm = connection.createStatement();
 //            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 
-            ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
+            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
 
             for (CustomerDTO dto :allCustomer){
                 tblCustomers.getItems().add(new CustomerTM(
@@ -167,7 +167,7 @@ public class ManageCustomersFormController {
 //                pstm.executeUpdate();
 
 
-                boolean isSaved = customerDAO.saveCustomer(new CustomerDTO(id,name,address));
+                boolean isSaved = customerDAO.save(new CustomerDTO(id,name,address));
              if (isSaved){
                  tblCustomers.getItems().add(new CustomerTM(id,name,address));
              }
@@ -195,7 +195,7 @@ public class ManageCustomersFormController {
 
                 CustomerDTO dto = new CustomerDTO(id,name,address);
 
-                customerDAO.updateCustomer(dto);
+                customerDAO.update(dto);
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -221,7 +221,7 @@ public class ManageCustomersFormController {
 
 
 
-        return customerDAO.existCustomer(id);
+        return customerDAO.exist(id);
     }
 
 
@@ -242,7 +242,7 @@ public class ManageCustomersFormController {
             initUI();
 
 
-            customerDAO.deleteCustomer(id);
+            customerDAO.delete(id);
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to delete the customer " + id).show();

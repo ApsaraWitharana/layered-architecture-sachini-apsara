@@ -6,25 +6,26 @@ import com.example.layeredarchitecture.model.ItemDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public interface ItemDAO {
-    ArrayList<ItemDTO> loadAllItems() throws SQLException, ClassNotFoundException ;
+public interface ItemDAO extends CrudDAO<ItemDTO>{
 
-     boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
-
-
-     boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
-
-
-     boolean exciteItem(String code) throws SQLException, ClassNotFoundException ;
-
-
-
-     void deleteItem(String code) throws SQLException, ClassNotFoundException ;
-
-
-   String genereteNewId() throws SQLException, ClassNotFoundException ;
-
-   ItemDTO searchItem(String s) throws SQLException, ClassNotFoundException ;
+//    ArrayList<ItemDTO> loadAllItems() throws SQLException, ClassNotFoundException ;
+//
+//     boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
+//
+//
+//     boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException ;
+//
+//
+//     boolean exciteItem(String code) throws SQLException, ClassNotFoundException ;
+//
+//
+//
+//     void deleteItem(String code) throws SQLException, ClassNotFoundException ;
+//
+//
+//   String genereteNewId() throws SQLException, ClassNotFoundException ;
+//
+//   ItemDTO searchItem(String s) throws SQLException, ClassNotFoundException ;
 
 
 
