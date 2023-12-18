@@ -67,7 +67,7 @@ public class PlaceOrderFormController {
     OrderDAOImpl orderDAO = new OrderDAOImpl();
     OrderDetailsDAOImpl orderdetailsDAO = new OrderDetailsDAOImpl();
 
-    //ek ek data tipe ewa dnna kohomd
+    //ek ek data tipe ewa dnna kohomd - T type septy
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -367,7 +367,7 @@ public class PlaceOrderFormController {
     public void txtQty_OnAction(ActionEvent actionEvent) {
     }
 
-    public void btnPlaceOrder_OnAction(ActionEvent actionEvent) {
+    public boolean btnPlaceOrder_OnAction(ActionEvent actionEvent) {
         boolean b = saveOrder(orderId, LocalDate.now(), cmbCustomerId.getValue(),
                 tblOrderDetails.getItems().stream().map(tm -> new OrderDetailDTO(tm.getCode(), tm.getQty(), tm.getUnitPrice())).collect(Collectors.toList()));
 
@@ -384,6 +384,8 @@ public class PlaceOrderFormController {
         tblOrderDetails.getItems().clear();
         txtQty.clear();
         calculateTotal();
+
+        return false;
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {

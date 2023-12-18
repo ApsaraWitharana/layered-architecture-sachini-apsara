@@ -4,7 +4,9 @@ import com.example.layeredarchitecture.model.CustomerDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-//T ona type ekk dnn puluwn wenn t dnne
+//T ona comman parameter type tiyagnna puluwn wenn t dnne
+
+// crudDAO - comman method thiya gann hadanne
 public interface CrudDAO <T>{
 
     ArrayList<T> getAll() throws SQLException, ClassNotFoundException ;

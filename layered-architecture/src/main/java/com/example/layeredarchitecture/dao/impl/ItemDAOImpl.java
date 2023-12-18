@@ -162,8 +162,8 @@ public boolean exist(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
         pstm.setString(1, s);
-        ResultSet rst = SQLUtil.execute("SELECT * FROM Item WHERE code=?",s);
-        //ResultSet rst = pstm.executeQuery();
+        //ResultSet rst = SQLUtil.execute("SELECT * FROM Item WHERE code=?",s);
+        ResultSet rst = pstm.executeQuery();
         rst.next();
         return new ItemDTO(rst.getString(1),rst.getString(2),rst.getBigDecimal(3),rst.getInt(4));
 

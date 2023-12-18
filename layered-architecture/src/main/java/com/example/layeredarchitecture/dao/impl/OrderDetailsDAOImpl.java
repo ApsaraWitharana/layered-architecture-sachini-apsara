@@ -1,11 +1,13 @@
 package com.example.layeredarchitecture.dao.impl;
 
+import com.example.layeredarchitecture.dao.SQLUtil;
 import com.example.layeredarchitecture.dao.custom.OrderDtailDAO;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderDetailsDAOImpl implements OrderDtailDAO {
@@ -19,7 +21,8 @@ public class OrderDetailsDAOImpl implements OrderDtailDAO {
         stm.setBigDecimal(3, dto.getUnitPrice());
         stm.setInt(4, dto.getQty());
         return stm.executeUpdate()>0;
-        //return SQLUtil.execute("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)",dto.getOid(),dto.getItemCode(),dto.getUnitPrice(),dto.getQty());
+
+    // return SQLUtil.execute("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)",dto.getOid(),dto.getItemCode(),dto.getUnitPrice(),dto.getQty());
 
     }
 

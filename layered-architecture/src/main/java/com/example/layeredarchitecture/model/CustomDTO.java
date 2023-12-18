@@ -10,6 +10,9 @@ public class CustomDTO {
     private BigDecimal unitPrice;
     private int qtyOnHand;
 
+    public CustomDTO(){
+
+    }
 
     public CustomDTO(String id, String name, String code, String description, BigDecimal unitPrice, int qtyOnHand) {
 

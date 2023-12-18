@@ -160,13 +160,13 @@ public class CustomerDAOImpl implements CustomerDAO {
     String newValue = null;
         pstm.setString(1, s);
         ResultSet rst = pstm.executeQuery();
-  //  ResultSet.rst = SQLUtil.execute("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
-        rst.next();
+    //ResultSet rst = SQLUtil.execute("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
+     rst.next();
     return new CustomerDTO(rst.getString(1),
             rst.getString(2),
             rst.getString(3));
 
-  //  return SQLUtil.execute("SELECT * FROM Customer WHERE id=?",s);
+ //  return SQLUtil.execute("SELECT * FROM Customer WHERE id=?",s);
         }
 
 

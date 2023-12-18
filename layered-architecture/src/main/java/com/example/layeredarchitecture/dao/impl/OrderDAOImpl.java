@@ -32,12 +32,13 @@ public class OrderDAOImpl implements OrdersDAO {
   }
   @Override
     public boolean getOrderDetail(String orderId) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
-        stm.setString(1, orderId);
-        return stm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
+//        stm.setString(1, orderId);
+//        return stm.executeQuery().next();
 
-     // return SQLUtil.execute("SELECT oid FROM `Orders` WHERE oid=?",orderId);
+    ResultSet rst = SQLUtil.execute("SELECT oid FROM `Orders` WHERE oid=?",orderId);
+    return rst.next();
 
     }
 
