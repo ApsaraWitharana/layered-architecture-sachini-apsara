@@ -91,6 +91,7 @@ public class CustomerDAOImpl implements CustomerDAO{
              allCustomer.add(customerDTO);
 
          }
+         //
 
         return allCustomer;
 
