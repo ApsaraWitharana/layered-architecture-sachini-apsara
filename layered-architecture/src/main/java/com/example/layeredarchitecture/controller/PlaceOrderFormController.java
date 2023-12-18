@@ -1,6 +1,11 @@
 package com.example.layeredarchitecture.controller;
 
-import com.example.layeredarchitecture.dao.*;
+import com.example.layeredarchitecture.dao.custom.CustomerDAO;
+import com.example.layeredarchitecture.dao.custom.ItemDAO;
+import com.example.layeredarchitecture.dao.impl.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.impl.ItemDAOImpl;
+import com.example.layeredarchitecture.dao.impl.OrderDAOImpl;
+import com.example.layeredarchitecture.dao.impl.OrderDetailsDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
@@ -8,7 +13,6 @@ import com.example.layeredarchitecture.model.OrderDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
 
 
-import com.example.layeredarchitecture.view.tdm.CustomerTM;
 import com.example.layeredarchitecture.view.tdm.OrderDetailTM;
 
 
@@ -58,7 +62,7 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     private String orderId;
 
-    CustomerDAO  customerDAO = new CustomerDAOImpl();
+    CustomerDAO customerDAO = new CustomerDAOImpl();
     ItemDAO itemDAO = new ItemDAOImpl();
     OrderDAOImpl orderDAO = new OrderDAOImpl();
     OrderDetailsDAOImpl orderdetailsDAO = new OrderDetailsDAOImpl();
